@@ -1,0 +1,12 @@
+apiVersion: api.my.domain/v1alpha1
+kind: Adapter
+metadata:
+  labels:
+    app.kubernetes.io/name: adapter
+    app.kubernetes.io/instance: adapter-sample
+    app.kubernetes.io/part-of: adapter-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: adapter-operator
+  name: adapter-sample
+spec:
+  # TODO(user): Add fields here

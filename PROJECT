@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: adapter-operator
 repo: github.com/Azanul/adapter-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: my.domain
+  group: api
+  kind: Adapter
+  path: github.com/Azanul/adapter-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"
