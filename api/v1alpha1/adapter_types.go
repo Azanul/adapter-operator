@@ -27,9 +27,10 @@ import (
 type AdapterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-
-	// Foo is an example field of Adapter. Edit adapter_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Image         string   `json:"image,omitempty"`
+	HostPort      int      `json:"host_port,omitempty"`
+	ContainerPort int      `json:"container_port,omitempty"`
+	Command       []string `json:"command,omitempty"`
 }
 
 // AdapterStatus defines the observed state of Adapter

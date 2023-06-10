@@ -7,6 +7,10 @@ metadata:
     app.kubernetes.io/part-of: adapter-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: adapter-operator
-  name: adapter-sample
+  name: traefik-mesh-adapter
 spec:
-  # TODO(user): Add fields here
+  command:
+    - ./meshery-traefik-mesh
+  container_port: 10006
+  host_port: 10006
+  image: layer5/meshery-traefik-mesh:stable-latest

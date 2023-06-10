@@ -18,6 +18,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 
 	kubeerror "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -92,6 +93,7 @@ func (r *AdapterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 
 func (r *AdapterReconciler) reconcileAdapter(ctx context.Context, enable bool, baseResource *apiv1alpha1.Adapter, req ctrl.Request) (ctrl.Result, error) {
 	object := adapterpkg.GetObjects(baseResource)[adapterpkg.ServerObject]
+	fmt.Println(object)
 	err := r.Get(ctx,
 		types.NamespacedName{
 			Name:      baseResource.Name,
@@ -118,7 +120,7 @@ func (r *AdapterReconciler) reconcileAdapter(ctx context.Context, enable bool, b
 				return ctrl.Result{}, ErrUpdateAdapter(er)
 			}
 		} else {
-			r.Log.Info("Updating")
+			r.Log.Info("Deleting")
 			er := r.Delete(ctx, object)
 			if er != nil {
 				return ctrl.Result{}, ErrDeletingAdapter(er)

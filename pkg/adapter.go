@@ -18,14 +18,19 @@ type Object interface {
 
 func GetObjects(m *mesheryv1alpha1.Adapter) map[string]Object {
 	return map[string]Object{
-		ServerObject: getServerObject(m.ObjectMeta.Namespace, m.ObjectMeta.Name),
+		ServerObject: getServerObject(m.ObjectMeta.Namespace, m.ObjectMeta.Name, m.Spec.Image, m.Spec.Command, m.Spec.HostPort, m.Spec.ContainerPort),
 	}
 }
 
-func getServerObject(namespace, name string) Object {
+func getServerObject(namespace, name, image string, command []string, hostPort, containerPort int) Object {
 	var obj = &v1.Deployment{}
 	Deployment.DeepCopyInto(obj)
 	obj.ObjectMeta.Namespace = namespace
 	obj.ObjectMeta.Name = name
+	obj.Spec.Template.Spec.Containers[0].Name = name
+	obj.Spec.Template.Spec.Containers[0].Image = image
+	obj.Spec.Template.Spec.Containers[0].Command = command
+	obj.Spec.Template.Spec.Containers[0].Ports[0].HostPort = int32(hostPort)
+	obj.Spec.Template.Spec.Containers[0].Ports[0].ContainerPort = int32(containerPort)
 	return obj
 }

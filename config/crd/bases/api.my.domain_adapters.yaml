@@ -35,9 +35,17 @@ spec:
           spec:
             description: AdapterSpec defines the desired state of Adapter
             properties:
-              foo:
-                description: Foo is an example field of Adapter. Edit adapter_types.go
-                  to remove/update
+              command:
+                items:
+                  type: string
+                type: array
+              container_port:
+                type: integer
+              host_port:
+                type: integer
+              image:
+                description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
+                  Important: Run "make" to regenerate code after modifying this file'
                 type: string
             type: object
           status:
